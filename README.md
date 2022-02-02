@@ -1,0 +1,1 @@
+secure_erase_app
