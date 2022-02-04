@@ -15,10 +15,10 @@ int isFileExistsStats(const char *path);
 vector<string> getAllFileOfFolder(string path);
 
 
-int main(int argc, char *argv[])
-{
-    argparse::ArgumentParser program("Secure Erase App");
-    program .add_argument("-p","--path")
+int main(int argc, char *argv[]) {
+    argparse::ArgumentParser program("Secure Erase App","0.1.0.1");
+    program .add_description("A secure erase app for linux based on shred program")
+            .add_argument("-p","--path")
             .required()
             .help("folder to delete");
 
@@ -28,17 +28,17 @@ int main(int argc, char *argv[])
             .implicit_value(true);
 
     try {
-    program.parse_args(argc, argv);
+        program.parse_args(argc, argv);
     }
     catch (const std::runtime_error& err) {
         std::cerr << err.what() << std::endl;
         std::cerr << program;
         std::exit(1);
     }
-    
-    string pathToDelete = program.get<std::string>("--path");
+
+    auto pathToDelete = program.get<std::string>("--path");
     const char *_path = pathToDelete.c_str();
-    
+
     if(isDirectoryExists(_path)){
         std::cout << " Folder selected : " << pathToDelete << std::endl;
         vector<string> files = getAllFileOfFolder(pathToDelete);
@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
         printf(" We found %d files in this folder\n", _length);
         printf(" Starting the secure deletion of this files\n");
 
-        for (string _fPath:files){
-            string fName = _fPath.substr(pathToDelete.size(),_fPath.size()); 
+        for (const string& _fPath:files){
+            string fName = _fPath.substr(pathToDelete.size(),_fPath.size());
             printf(log_line.c_str(),_id, fName.c_str());
             _id++;
         }
@@ -61,15 +61,15 @@ int main(int argc, char *argv[])
             std::cout << pathToDelete << " does not exist !" << std::endl;
             return 1;
         }
-       
+
     }
-    
+    return 0;
 }
 
 
 /**
  * Function to check whether a directory exists or not.
- * It returns 1 if given path is directory and  exists 
+ * It returns 1 if given path is directory and  exists
  * otherwise returns 0.
  */
 int isDirectoryExists(const char *path)
@@ -94,7 +94,7 @@ int isFileExists(const char *path)
     // Try to open file
     FILE *fptr = fopen(path, "r");
 
-    // If file does not exists 
+    // If file does not exists
     if (fptr == NULL)
         return 0;
 
@@ -110,7 +110,7 @@ vector<string> getAllFileOfFolder(string path)
     vector<string> all_files;
     for (const auto & file : std::filesystem::directory_iterator(path)){
         std::string file_name = file.path();
-        const char *_path = file_name.c_str(); 
+        const char *_path = file_name.c_str();
         if (!isDirectoryExists(_path)){
             all_files.push_back(file_name);
         }else{
