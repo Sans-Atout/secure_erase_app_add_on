@@ -3,6 +3,10 @@
 #include <string>
 #include "argparse/argparse.hpp"
 #include "getDirectoryInformation.h"
+#include "shredFile.h"
+#define PROGRAM_NAME "secure Erase App"
+
+#define AUTHORS proper_name ("Augustin ROUSSET-ROUVIERE")
 
 using namespace std;
 
@@ -47,7 +51,9 @@ int main(int argc, char *argv[]) {
             // shred -zvu -n  7
             // source code is in shred.cpp
             printf(log_line.c_str(),_id, fName.c_str());
+            shredFile::securelyEraseFile(_fPath.c_str());
             _id++;
+            return 0;
         }
     }else{
         if (info->isFileExists()){

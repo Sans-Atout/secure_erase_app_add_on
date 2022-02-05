@@ -3,10 +3,10 @@ This project aims to create an application that will securely delete files on a 
 
 ## Currently done
 
-✅ Recovery of all files in a folder
+✅ Recovery of all files in a folder \
+✅ Secure deletion of a file
 
 ## TODO
-❎  Secure deletion of a file \
 ❎  Error management \
 ❎  Choice of suppression method \
 ❎  Implementation of the command line interface \
