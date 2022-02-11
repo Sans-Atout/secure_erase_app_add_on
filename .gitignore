@@ -1,5 +1,7 @@
 #ignore folder
 /cmake-build-debug
+/build
+/node_modules
 
 # Prerequisites
 *.d

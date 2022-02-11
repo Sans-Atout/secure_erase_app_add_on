@@ -1,0 +1,30 @@
+{
+  "name": "secure_erase_app_add_on",
+  "version": "1.0.0",
+  "description": "A secure Erase Add-On for electron App",
+  "main": "index.js",
+  "scripts": {
+    "install": "cmake-js compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sans-Atout/secure_erase_app_add_on.git"
+  },
+  "keywords": [
+    "Erase",
+    "App",
+    "Electron"
+  ],
+  "author": "Augustin ROUSSET-ROUVIERE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sans-Atout/secure_erase_app_add_on/issues"
+  },
+  "homepage": "https://github.com/Sans-Atout/secure_erase_app_add_on#readme",
+  "dependencies": {
+    "node-addon-api": "^4.3.0"
+  },
+  "devDependencies": {
+    "cmake-js": "^6.3.0"
+  }
+}

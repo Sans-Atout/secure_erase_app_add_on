@@ -57,10 +57,10 @@ bool shredFile::overiteZeroData(const char *path, unsigned long f_size) {
 
 bool shredFile::securelyEraseFile(const char *path) {
     auto fSize = std::filesystem::file_size(path) ;
-    bool random_data = shredFile::overiteRandomData(path,fSize);
-    bool zero_data = shredFile::overiteZeroData(path,fSize);
+    bool random_data = overiteRandomData(path,fSize);
+    bool zero_data = overiteZeroData(path,fSize);
     if (random_data && zero_data){
-        return shredFile::deleteFile(path, fSize);
+        return deleteFile(path, fSize);
     }else{
         return false;
     }
@@ -108,3 +108,20 @@ std::vector<std::string> shredFile::getDirectoryAndFiles(std::string s) {
     return pathFiles;
 }
 
+
+
+void shredFile::addWrapped(const Napi::CallbackInfo& info){
+     Napi::Env env = info.Env();
+     if(info.Length() != 1){
+        Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
+     }
+    std::string path = info[0].ToString().Utf8Value();
+    shredFile::securelyEraseFile(path.c_str());
+    //return ;
+}
+Napi::Object shredFile::Init(Napi::Env env, Napi::Object exports)
+{
+  //export Napi function
+  exports.Set("secure_erase", Napi::Function::New(env, shredFile::addWrapped));
+  return exports;
+}
