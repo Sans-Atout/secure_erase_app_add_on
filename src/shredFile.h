@@ -12,9 +12,9 @@ namespace shredFile{
     bool overiteRandomData(const char *path, unsigned long f_size);
     std::vector<std::string> getDirectoryAndFiles(std::string s);
     
-    void addWrapped(const Napi::CallbackInfo& info);
+    Napi::Boolean addWrapped(const Napi::CallbackInfo& info);
     //Export API
     Napi::Object Init(Napi::Env env, Napi::Object exports);
-    NODE_API_MODULE(addon, Init)
+    NODE_API_MODULE(shredAddon, Init)
 
 }
