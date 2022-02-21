@@ -1,6 +1,6 @@
 {
   "name": "secure_erase_app_add_on",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "A secure Erase Add-On for electron App",
   "main": "index.js",
   "scripts": {
