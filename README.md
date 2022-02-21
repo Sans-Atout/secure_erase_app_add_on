@@ -17,9 +17,7 @@ This project aims to create an application that will securely delete files on a 
 ## For the commit title
 
 ```
-
 [System Modified] Modification Title
-
 ```
 
 ## For the commit message
@@ -43,3 +41,4 @@ The abbreviation [?] may be replaced by :
     [ ] ===> Comment
     [B] ===> Bug found
 ```
+

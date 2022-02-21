@@ -60,32 +60,36 @@ std::vector<std::string> getDirectoryInformation::getAllFileOfFolder(const std::
 Napi::Boolean getDirectoryInformation::wrapperDirectoryExist(const Napi::CallbackInfo& info)
 {
     Napi::Env env = info.Env();
-    if(info.Length() != 1)Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
+    if(info.Length() != 1){
+        Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
+    }
     std::string path = info[0].ToString().Utf8Value();
     return Napi::Boolean::New(env, getDirectoryInformation::isDirectoryExists(path));
 }
 
 Napi::Boolean getDirectoryInformation::wrapperFileExist(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
-    if(info.Length() != 1)Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
+    if(info.Length() != 1){
+        Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
+    }
     std::string path = info[0].ToString().Utf8Value();
     return Napi::Boolean::New(env , getDirectoryInformation::isFileExists(path));
 }
-
+/*
 auto getDirectoryInformation::wrapperFileOfFolder(const Napi::CallbackInfo& info){
     Napi::Env env = info.Env();
     if(info.Length() != 1)Napi::TypeError::New(env, "arg1::string path expected").ThrowAsJavaScriptException();
     std::string path = info[0].ToString().Utf8Value();
     //getDirectoryInformation::getAllFileOfFolder(path);
     return getDirectoryInformation::getAllFileOfFolder(path);
-}
+}*/
 
 
 Napi::Object getDirectoryInformation::Init(Napi::Env env, Napi::Object exports)
 {
     //export Napi function
-    exports.Set("is_file_exist", Napi::Function::New(env, getDirectoryInformation::wrapperFileExist));
-    exports.Set("isFolderExist", Napi::Function::New(env, getDirectoryInformation::wrapperDirectoryExist));
+    exports.Set("file_exist", Napi::Function::New(env, getDirectoryInformation::wrapperFileExist));
+    exports.Set("folder_exist", Napi::Function::New(env, getDirectoryInformation::wrapperDirectoryExist));
     //exports.Set("getFileOfFolder", Napi::Function::New(env, getDirectoryInformation::wrapperFileOfFolder));
 
     return exports;
